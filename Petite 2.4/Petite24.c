@@ -5,7 +5,11 @@
 
 #pragma warning(disable: 4146)
 
-#define DLLEXPORT __declspec(dllexport)
+#define DLLEXPORT                __declspec(dllexport)
+#define IMP_REC_OK               200
+#define IMP_REC_MAP_ERROR        201
+#define IMP_REC_MAP_SIZE_INVALID 203
+#define IMP_REC_BAD_READ_POINTER 205
 
 DLLEXPORT DWORD Trace(DWORD hFileMap,
                       DWORD dwSizeMap,
@@ -13,15 +17,15 @@ DLLEXPORT DWORD Trace(DWORD hFileMap,
                       DWORD dwToTrace,
                       DWORD dwExactCall);
 
-#define IMP_REC_OK               200
-#define IMP_REC_MAP_ERROR        201
-#define IMP_REC_MAP_SIZE_INVALID 203
-#define IMP_REC_BAD_READ_POINTER 205
-
-uint32_t rotate_left(uint32_t value, unsigned int count) {
-  const unsigned int mask = (CHAR_BIT*sizeof(value) - 1);
-  count &= mask;
-  return (value << count) | (value >> ((-count) & mask));
+// Parameters:
+// -----------
+// <value>       : Value to be rotated
+// <count>       : Number of bits to rotate
+//
+uint32_t rotate_left(uint32_t Value, unsigned int Count) {
+  const unsigned int mask = (CHAR_BIT*sizeof(Value) - 1);
+  Count &= mask;
+  return (Value << Count) | (Value >> ((-Count) & mask));
 }
 
 // Parameters:
